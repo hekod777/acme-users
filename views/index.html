@@ -1,0 +1,9 @@
+{% extends './layout.html' %}
+{% block content %}
+<p>this is the home page</p>
+<form action = '/departments' method = 'POST'>
+	<label for='name_field'>Add a new department:</label>
+	<input name = 'departmentname' type = 'text' id = 'name_field'/>
+	<input type = 'submit' value = 'submit'>
+</form>
+{% endblock %}

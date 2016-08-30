@@ -1,0 +1,44 @@
+{% extends './layout.html' %}
+{% block content %}
+
+<ul>
+{% for department in departments %}
+<li>
+	<a href = '/departments/{{department.id}}'>{{ department.name }}</a>
+</li>
+{% endfor %}
+</ul>
+
+
+{% if showForm %}
+<form action = '/departments/{{theDepartment.id}}/todefault' method='POST'>
+	<button type = 'submit'> Change this to Default Department</button>
+</form>
+
+<form action = '/departments/{{theDepartment.id}}/addemployee' method = 'POST'>
+	<label for='name_field'>Add a new employee to {{theDepartment.name}} department</label>
+	<input name = 'employeename' type = 'text' id = 'name_field'/>
+	<input type = 'submit' value = 'submit'>
+</form>
+{% endif %}
+
+{% if !showForm %}
+<p> NO departments yet!</p>
+<p> Please add new department in the home page!</p>
+
+{% endif %}
+
+<ul>
+	{% for employee in employees %}
+		<li>
+			{{employee.name}} 
+			<form action = '/users/tocustomer/{{employee.id}}?_method=PUT' method = 'GET'>
+				<button type = 'submit'> Make Customer</button>
+			</form>
+			<form action = '/users/{{currentDepartment.id}}/{{employee.id}}/delete?_method=DELETE' method='POST'>
+				<button type = 'submit'> DELETE Employee</button>
+			</form>
+		</li>
+	{% endfor %}
+</ul>
+{% endblock %}

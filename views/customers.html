@@ -1,0 +1,28 @@
+{% extends './layout.html'%}
+{% block content %}
+
+<h1>Here are all the Customers!</h1>
+
+<form action = '/users/addcustomer' method = 'POST'>
+	<label for = 'name_field'>Add a new Customer: </label>
+	<input name = 'name' type = 'text'/>
+	<input type = 'submit'  value = 'sumbit new customer!'>
+</form>
+
+
+<ul>
+	{% for customer in customers %}
+	<li>
+		{{ customer.name }}
+		<form action = '/users/{{customer.id}}/toemployee' method = 'POST'>
+			<button type = 'submit'> Make Employee</button>
+		</form>
+		<form action = '/users/{{customer.id}}/delete' method='POST'>
+			<button type = 'submit'> DELETE Customer</button>
+		</form>
+	</li>
+	{% endfor %}
+</ul> 
+
+
+{% endblock %}
